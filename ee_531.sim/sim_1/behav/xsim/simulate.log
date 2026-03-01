@@ -1,0 +1,18 @@
+Time resolution is 1 ps
+PASS: A=3 B=2 C=4 | Result=20
+PASS: A=7 B=1 C=3 | Result=24
+PASS: A=15 B=15 C=15 | Result=450
+PASS: A=0 B=8 C=5 | Result=40
+PASS: A=9 B=6 C=2 | Result=30
+PASS: A=11 B=11 C=11 | Result=242
+PASS: A=1 B=1 C=15 | Result=30
+PASS: A=12 B=13 C=10 | Result=250
+PASS: A=7 B=14 C=12 | Result=252
+PASS: A=6 B=10 C=9 | Result=144
+PASS: A=1 B=1 C=7 | Result=14
+PASS: A=13 B=8 C=2 | Result=42
+PASS: A=6 B=9 C=3 | Result=45
+PASS: A=13 B=6 C=11 | Result=209
+PASS: A=15 B=12 C=4 | Result=108
+All tests completed.
+$finish called at time : 765 ns : File "C:/Users/Owner/ee_531/ee_531.srcs/sim_1/new/fsm_alu_tb.sv" Line 113

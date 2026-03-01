@@ -1,0 +1,14 @@
+# Vivado generated files
+*.jou
+*.log
+*.str
+*.wdb
+*.cache/
+*.runs/
+
+# Optional: IP build folders
+*.srcs/sources_1/ip/
+
+# Ignore OS files
+Thumbs.db
+.DS_Store

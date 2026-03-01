@@ -1,0 +1,12 @@
+0.7
+2020.2
+Nov  8 2024
+22:36:57
+C:/Users/Owner/ee_531/ee_531.sim/sim_1/behav/xsim/glbl.v,1724786425,verilog,,,,glbl,,uvm,,,,,,
+C:/Users/Owner/ee_531/ee_531.srcs/sim_1/new/alu_tb.sv,1769231843,systemVerilog,,,,alu_tb,,uvm,,,,,,
+C:/Users/Owner/ee_531/ee_531.srcs/sim_1/new/fsm_alu_tb.sv,1771361803,systemVerilog,,,,fsm_alu_tb,,uvm,,,,,,
+C:/Users/Owner/ee_531/ee_531.srcs/sources_1/new/alu.sv,1769225551,systemVerilog,,C:/Users/Owner/ee_531/ee_531.srcs/sim_1/new/alu_tb.sv,,alu,,uvm,,,,,,
+C:/Users/Owner/ee_531/ee_531.srcs/sources_1/new/booth_multiplier.sv,1771362232,systemVerilog,,C:/Users/Owner/ee_531/ee_531.srcs/sources_1/new/csa.sv,,booth_multiplier,,uvm,,,,,,
+C:/Users/Owner/ee_531/ee_531.srcs/sources_1/new/csa.sv,1771363028,systemVerilog,,C:/Users/Owner/ee_531/ee_531.srcs/sources_1/new/fsm.sv,,csa_4bit;full_adder,,uvm,,,,,,
+C:/Users/Owner/ee_531/ee_531.srcs/sources_1/new/fsm.sv,1771361506,systemVerilog,,C:/Users/Owner/ee_531/ee_531.srcs/sources_1/new/fsm_alu.sv,,fsm_controller,,uvm,,,,,,
+C:/Users/Owner/ee_531/ee_531.srcs/sources_1/new/fsm_alu.sv,1771361629,systemVerilog,,C:/Users/Owner/ee_531/ee_531.srcs/sim_1/new/fsm_alu_tb.sv,,fsm_alu,,uvm,,,,,,
