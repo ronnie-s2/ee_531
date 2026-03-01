@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date: 03/01/2026 02:01:37 PM
+// Create Date: 03/01/2026 02:48:34 PM
 // Design Name: 
-// Module Name: plru_4way
+// Module Name: fifo_repl
 // Project Name: 
 // Target Devices: 
 // Tool Versions: 
@@ -19,7 +19,8 @@
 // 
 //////////////////////////////////////////////////////////////////////////////////
 
-module plru_4way(
+
+module fifo_repl(
 
     );
 endmodule
