@@ -4,11 +4,23 @@
 *.str
 *.wdb
 *.cache/
+*.hw/
 *.runs/
+*.backup/
 
-# Optional: IP build folders
+# Build and synthesis output
+*.ip_user_files/
 *.srcs/sources_1/ip/
+*.sim/
 
-# Ignore OS files
+# Vivado project files you might want to ignore
+*.xpr
+*.xise
+*.bit
+*.bin
+*.dcp
+*.ltx
+
+# OS-specific files
 Thumbs.db
 .DS_Store
