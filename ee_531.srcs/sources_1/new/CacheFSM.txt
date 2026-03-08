@@ -1,0 +1,151 @@
+`timescale 1ns / 1ps
+
+module CacheFSM(
+    input  logic clk,
+    input  logic rst,
+    input  logic req_valid,   
+    input  logic rw,          // 0 = read request, 1 = write request
+    input  logic hit,         
+    input  logic miss,        
+
+    output logic update_1,    
+    output logic update_2,    
+    output logic update_3,    
+
+    output logic read_1,      
+    output logic read_2,      
+    output logic read_3,      
+    output logic read_mem,    
+
+    output logic write_1,     
+    output logic write_2,     
+    output logic write_3,     
+    output logic write_mem    
+);
+
+    typedef enum logic [2:0] {
+        ST_IDLE,
+        ST_READ_L1,
+        ST_READ_L2,
+        ST_READ_L3,
+        ST_READ_MEM,
+        ST_WRITE_L1,
+        ST_WRITE_L2,
+        ST_WRITE_L3
+    } state_type;
+      state_type PS, NS;
+    
+    always_ff @(posedge clk or posedge rst) begin
+        if (rst)
+            PS <= ST_IDLE;
+        else
+            PS <= NS;
+    end
+
+    always_comb begin
+        NS       = PS;
+        update_1 = 1'b0;
+        update_2 = 1'b0;
+        update_3 = 1'b0;
+        read_1   = 1'b0;
+        read_2   = 1'b0;
+        read_3   = 1'b0;
+        read_mem = 1'b0;
+        write_1  = 1'b0;
+        write_2  = 1'b0;
+        write_3  = 1'b0;
+        write_mem= 1'b0;
+
+        case (PS)
+            ST_IDLE: begin
+                if (req_valid) begin
+                    if (rw == 1'b0)
+                        NS = ST_READ_L1;   
+                    else
+                        NS = ST_WRITE_L1;  
+                end
+            end
+
+            ST_READ_L1: begin
+                read_1 = 1'b1;
+                if (hit) begin
+                    update_1 = 1'b1;   // L1 hit
+                    NS = ST_IDLE;
+                end
+                else if (miss) begin
+                    NS = ST_READ_L2;
+                end
+            end
+            
+            ST_READ_L2: begin
+                read_2 = 1'b1;
+                if (hit) begin
+                    update_2 = 1'b1;   // L2 hit
+                    NS = ST_IDLE;
+                end
+                else if (miss) begin
+                    NS = ST_READ_L3;
+                end
+            end
+
+            ST_READ_L3: begin
+                read_3 = 1'b1;
+
+                if (hit) begin
+                    update_3 = 1'b1;   // L3 hit, 
+                    NS = ST_IDLE;
+                end
+                else if (miss) begin
+                    NS = ST_READ_MEM;
+                end
+            end
+
+            ST_READ_MEM: begin
+                read_mem = 1'b1;
+                NS = ST_IDLE;
+            end
+
+            ST_WRITE_L1: begin
+                write_1 = 1'b1;
+
+                if (hit) begin
+                    // write hit in L1
+                    NS = ST_IDLE;
+                end
+                else if (miss) begin
+                    NS = ST_WRITE_L2;
+                end
+            end
+
+            ST_WRITE_L2: begin
+                write_2 = 1'b1;
+
+                if (hit) begin
+                    // write hit in L2
+                    NS = ST_IDLE;
+                end
+                else if (miss) begin
+                    NS = ST_WRITE_L3;
+                end
+            end
+
+            ST_WRITE_L3: begin
+                write_3 = 1'b1;
+
+                if (hit) begin
+                    // write hit in L3
+                    NS = ST_IDLE;
+                end
+                else if (miss) begin
+                    write_mem = 1'b1;
+                    NS = ST_IDLE;
+                end
+            end
+
+            default: begin
+                NS = ST_IDLE;
+            end
+        endcase
+    end
+
+endmodule
