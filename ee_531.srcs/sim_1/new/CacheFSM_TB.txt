@@ -1,0 +1,141 @@
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company: 
+// Engineer: 
+// 
+// Create Date: 03/02/2026 09:19:32 AM
+// Design Name: 
+// Module Name: tb_CacheFSM
+// Project Name: 
+// Target Devices: 
+// Tool Versions: 
+// Description: 
+// 
+// Dependencies: 
+// 
+// Revision:
+// Revision 0.01 - File Created
+// Additional Comments:
+// 
+//////////////////////////////////////////////////////////////////////////////////
+
+
+module tb_CacheFSM();
+    logic clk;
+    logic rst;
+    logic req_valid;
+    logic rw;
+    logic hit;
+    logic miss;   
+    logic update_1;
+    logic update_2;
+    logic update_3;
+    logic read_1;
+    logic read_2;
+    logic read_3;
+    logic read_mem;
+    logic write_1;
+    logic write_2;
+    logic write_3;
+    logic write_mem;
+    
+    CacheFSM DUT(
+    .clk(clk),
+    .rst(rst),
+    .req_valid(req_valid),
+    .rw(rw),
+    .hit(hit),
+    .miss(miss),
+    .update_1(update_1),
+    .update_2(update_2),
+    .update_3(update_3),
+    .read_1(read_1),
+    .read_2(read_2),
+    .read_3(read_3),
+    .read_mem(read_mem),
+    .write_1(write_1),
+    .write_2(write_2),
+    .write_3(write_3),
+    .write_mem(write_mem)
+);
+
+
+ // Clock
+    always #5 clk = ~clk;
+
+
+    initial begin
+    clk = 0;
+    rst = 1;
+    req_valid = 0;
+    rw = 0;
+    hit = 0;
+    miss = 0;
+
+    #10;
+    rst = 0;
+
+    //
+    #10;
+    req_valid = 1;
+    rw = 0;
+
+    #10;
+    req_valid = 0;
+
+    // L1 miss
+    #10;
+    miss = 1;
+    hit = 0;
+
+    #10;
+    miss = 0;
+
+    // L2 hit
+    #10;
+    hit = 1;
+    miss = 0;
+
+    #10;
+    hit = 0;
+
+    //WRITE HIT IN L1
+    #20;
+    req_valid = 1;
+    rw = 1;          // write request
+
+    #10;
+    req_valid = 0;
+
+    #10;
+    hit = 1;         
+    miss = 0;
+
+    #10;
+    hit = 0;
+
+    //WRITE MISS IN L1, HIT IN L2
+    #20;
+    req_valid = 1;
+    rw = 1;          // write request
+
+    #10;
+    req_valid = 0;
+
+    #10;
+    miss = 1;        
+
+    #10;
+    miss = 0;
+
+    #10;
+    hit = 1;         
+
+    #10;
+    hit = 0;
+
+    #40;
+    
+end
+   
+endmodule
