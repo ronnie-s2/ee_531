@@ -42,7 +42,7 @@ module fifo_repl #(
     always_ff @(posedge clk or negedge rst_n) begin
         if (!rst_n) begin
             for (int i = 0; i < NUM_SETS; i++) 
-                fifo_ptr[i] <= '0;  // start from way 0
+                fifo_ptr[i] = '0;  // start from way 0
         end else if (access_valid) begin
             // Increment pointer modulo WAYS
             fifo_ptr[set_index] <= fifo_ptr[set_index] + 1;

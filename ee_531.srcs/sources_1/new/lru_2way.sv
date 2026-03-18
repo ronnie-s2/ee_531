@@ -44,7 +44,7 @@ module lru_2way #(
     always_ff @(posedge clk or negedge rst_n) begin
         if (!rst_n) begin
             for (int i = 0; i < NUM_SETS; i++) begin
-                lru_bit[i] <= 0;
+                lru_bit[i] = 0;
             end
         end
         else if (access_valid) begin

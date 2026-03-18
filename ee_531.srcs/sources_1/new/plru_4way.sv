@@ -54,7 +54,7 @@ module plru_4way #(
     always_ff @(posedge clk or negedge rst_n) begin
         if (!rst_n) begin
             for (int i = 0; i < NUM_SETS; i++)
-                plru_bits[i] <= 3'b000;  // default all root left
+                plru_bits[i] = 3'b000;  // default all root left
         end
         else if (access_valid) begin
             case (access_way)
